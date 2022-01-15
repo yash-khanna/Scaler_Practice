@@ -1,0 +1,148 @@
+int count_Pairs = 0
+for (int i = 0 ; i < N; i++) {
+  if (a[i] == "i") {
+    for (int j = i + 1 ; i < N ; j++) {
+      if (a[i] == 'g') {
+        count_Pairs++;
+      }
+    }
+  }
+}
+return count_Pairs;
+
+T.C. = O(N)*O(N) = o(N^2)
+
+// Optimised approach
+
+/*
+start from left and then keep count a for the number of "a" encountered and maintain a variable for the ans.
+
+Once you encounter a "g" then simply add the count to the answer.
+*/
+
+int count_OF_A = 0
+int ans = 0;
+for (int i = 0 ;i < N ; i++) {
+  if (a[i] == 'a') {
+    count_OF_A++;
+  } else if (a[i] == 'g') {
+    ans+=count_OF_A;  
+  }
+}
+
+T.C =. O(N)
+S.C = O(1)
+
+LEADERS IN THE ARRAY
+
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+
+We need to find leader from back
+
+Example : array - [10 7 9 3 2 4]
+
+last element is always leader and the count increase
+
+leader elements = 4, 9, 10 
+count = 3
+
+Brute Force method
+
+we start from back declare last element
+
+leader_count = 1
+max = Integer.MIN_VALUE;
+
+for (int i = N - 2 ; i>=0 ; i++) {
+  if (a[i]> max) {
+    leader_count++;
+  }
+}
+return leader_count;
+
+T.C = O(N)
+S.C = O(1)
+
+
+Question on closest Min Max
+
+Example : 6 2 5 4 5 1 1 2 6 4 1
+
+we need to find the subarray with values 6, 4, 1 which contains both max and min
+
+Brute Force approach:
+
+// First find max and min
+Amax = Integer.MIN_VALUE;
+Amin = Integer.MAX_VALUE;
+
+for (int i = 0 ; i < N ; i++) {
+  if (A[i] > Amax) {
+    Amax = A[i];
+  } if (A[i] < Amin) {
+    Amin = A[i];
+  }
+}
+
+// we have the value of Amax and Amin
+
+int length_Subarray = Integer.MAX_VALUE;
+
+for (int i = 0 ; i < N ; i++) {
+  if (A[i] == Amax) {
+    for (int j = i ; j < N ; j++) {
+      if (A[j] == Amin) {
+       length_Subarray = Integer.min(length_Subarray, j - i + 1); 
+      }
+    }
+  } else if (A[i] == Amin){
+    for (int j = i ; j < N ; j++) {
+      if (A[j] == Amax) {
+        length_Subarray = Integer.min (length_Subarray, j - i + 1);
+      }
+    }
+  }
+}
+return length_subArray;
+
+// Optimized approach
+
+~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+// first the min and max are needed
+
+int Amax = Integer.MIN_VALUE;
+int Amin = Integer.MAX_VALUE;
+
+for (int i = 0 ; i < N; i ++){
+  if (A[i] > Amax) {
+    Amax = A[i];
+  }
+  if (A[i] < Amin) {
+    Amin = A[i];
+  }
+}
+
+int lastMax = -1; // This is just the index for the traversal of elements.
+int lastMin = -1; // This is just the index for the traversal of elements.
+
+int prevLens = 0;
+
+for (int i = 0 ; i < N ; i++) {
+  if (a[i] == Amax) {
+    lastMax = i;
+  } else if (a[i] == Amin) {
+    lastMin = i;
+  }
+  int newLen = Math.abs(lastMax - lastMin) + 1;
+  if (prevLens > newLen) {
+    prevLens = newLen;
+  }
+}
+return prevLens;  
