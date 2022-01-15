@@ -154,3 +154,55 @@ for (int i = 0 ; i < N ; i++) {
   }
 }
 return prevLens;  
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Bulb Question
+
+Question Description : If some switch is turned off and you turn it on so it causes the list of to toggle other buttons onto the right.
+
+Example :-
+
+1010110
+1101001
+1110110
+1111001
+1111110
+1111111
+
+So there are some bulbs which causing other buttons to change.
+
+First we give the brute force approach
+
+Brute Force Approach
+
+In O(N^2)
+int count = 0;
+for (int i = 0 ; i < N ; i++) {
+  if (a[i] == 0) {
+    count++;
+    for (int j = i + 1 ; j < N ; j++) {
+      if (a[i] == 1) {a[i] = 0;}
+      else {a[i] = 1;}
+    }
+  }
+}
+return count;
+
+Optimised Approach
+
+int toggled = 0;
+int current_State = Integer.MIN_VALUE;
+for (int i = 0 ; i < N ; i++) {
+  if (toggled%2 == 0) {
+    current_State = A[i];
+  } else {
+    current_State = 1 - A[i];
+  }
+  if (current_State) {
+    toggled++;
+  }
+}
+return toggled;
